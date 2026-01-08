@@ -10036,3 +10036,12 @@ product-rerender {
   display: -webkit-box;
   overflow: hidden;
 }
+
+
+.contact-information .email {
+    background: rgb(var(--text-color) / .05);
+    padding: var(--spacing-6);
+    width: 100%;
+    border-radius: var(--rounded);
+    border: 1px solid var(--border-color);
+}

@@ -20,6 +20,8 @@
       "type": "contact",
       "settings": {
         "email-contact": "Contact@example.com",
+        "phone-contact": "7405202130",
+        "location-contact": "NYC, USA",
         "full_width": true,
         "subheading": "Contact Us",
         "title": "Do you have any question?",

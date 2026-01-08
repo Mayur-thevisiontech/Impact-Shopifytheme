@@ -36,6 +36,12 @@
           <div class="email">
               {{ section.settings.email-contact }}
           </div>
+          <div class="phone">
+              {{ section.settings.phone-contact }}
+          </div>
+          <div class="location">
+              {{ section.settings.location-contact }}
+          </div>
         </div>
       </div>
     {%- endif -%}
@@ -126,6 +132,18 @@
       "id": "email-contact",
       "label": "Email",
       "default": "example@gmail.com"
+    },
+    {
+      "type": "text",
+      "id": "phone-contact",
+      "label": "Phone",
+      "default": "+1234567890"
+    },
+    {
+      "type": "text",
+      "id": "location-contact",
+      "label": "location",
+      "default": "NYC, USA"
     },
     {
       "type": "checkbox",

@@ -10037,7 +10037,12 @@ product-rerender {
   overflow: hidden;
 }
 
-
+.contact-information {
+    display: flex;
+    gap: 15px;
+    flex-direction: column;
+    margin-top: 20px;
+}
 .contact-content {
     background: rgb(var(--text-color) / .05);
     padding: var(--spacing-6);

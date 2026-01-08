@@ -1,0 +1,169 @@
+{% schema %}
+{
+  "name": "Sales Banners",
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section Title"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "banner",
+      "name": "Banner",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Banner Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "text",
+          "id": "subtext",
+          "label": "Sub-text"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button Label"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Sales Banners",
+      "category": "Custom",
+      "blocks": [
+        {"type": "banner"}
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+<style>
+.sales-banners-blocks {
+  display: flex;
+  gap: 0; /* No space between blocks */
+  height: 400px; /* Added height for consistent vertical size */
+}
+.sales-banner-block {
+  flex: 1 1 0;
+  transition: flex-basis 0.4s cubic-bezier(0.4,0,0.2,1);
+  position: relative;
+  overflow: hidden;
+}
+.sales-banner-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
+}
+.sales-banner-block:hover {
+  flex-basis: 50% !important;
+  z-index: 2;
+}
+.sales-banner-block:hover .sales-banner-image {
+  transform: scale(1.05); /* Subtle zoom on hover */
+}
+.sales-banners-blocks:hover .sales-banner-block:not(:hover) {
+  flex-basis: 16.6% !important;
+  opacity: 0.7;
+}
+.sales-banner-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background: rgba(0,0,0,0.5);
+  color: #fff;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.4s cubic-bezier(0.4,0,0.2,1);
+  z-index: 1;
+}
+.sales-banner-block:hover .sales-banner-content {
+  opacity: 1;
+}
+.sales-banner-title,
+.sales-banner-subtext {
+  color: #fff;
+}
+.sales-banner-subtext {
+  margin: 10px 0;
+}
+.sales-banner-button {
+  margin-top: 15px;
+  background-color: #fff;
+  color: #000;
+  border-color: #fff;
+}
+.sales-banner-button:hover {
+  background-color: transparent;
+  color: #fff;
+}
+
+@media (max-width: 900px) {
+  .sales-banners-blocks {
+    flex-direction: column;
+    gap: 10px;
+    height: auto;
+  }
+  .sales-banner-block,
+  .sales-banner-block:hover,
+  .sales-banners-blocks:hover .sales-banner-block:not(:hover) {
+    flex-basis: auto !important;
+    opacity: 1;
+    height: 300px;
+  }
+  /* On mobile, show content by default for usability */
+  .sales-banner-content {
+    opacity: 1;
+  }
+}
+</style>
+
+<div class="sales-banners-section">
+  {%- render 'section-header', heading: section.settings.section_title -%}
+  <div class="sales-banners-blocks">
+    {% for block in section.blocks %}
+      <div class="sales-banner-block" {{ block.shopify_attributes }}>
+        {% if block.settings.image != blank %}
+          <img src="{{ block.settings.image | image_url }}" alt="{{ block.settings.title | escape }}" class="sales-banner-image" />
+        {% endif %}
+        <div class="sales-banner-content">
+          <div class="prose">
+            {% if block.settings.title != blank %}
+              <h2 class="sales-banner-title h3">{{ block.settings.title }}</h2>
+            {% endif %}
+            {% if block.settings.subtext != blank %}
+              <p class="sales-banner-subtext">{{ block.settings.subtext }}</p>
+            {% endif %}
+            {% if block.settings.button_label != blank and block.settings.button_link != blank %}
+              <a href="{{ block.settings.button_link }}" class="button sales-banner-button">{{ block.settings.button_label }}</a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div> 

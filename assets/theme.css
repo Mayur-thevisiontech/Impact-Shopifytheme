@@ -10038,7 +10038,7 @@ product-rerender {
 }
 
 
-.contact-information .email {
+.contact-content {
     background: rgb(var(--text-color) / .05);
     padding: var(--spacing-6);
     width: 100%;

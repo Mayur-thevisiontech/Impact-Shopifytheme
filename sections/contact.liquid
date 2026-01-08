@@ -32,6 +32,11 @@
         <div class="prose {% if text_position == 'center' %}text-center{% endif %}">
           {{- content -}}
         </div>
+        <div class="contact-information">
+          <div class="email">
+              {{ section.settings.email-contact }}
+          </div>
+        </div>
       </div>
     {%- endif -%}
 
